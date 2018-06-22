@@ -1,0 +1,53 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Iniciar Sesión</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"></link>
+	<style>
+		.re{
+			text-align: left;
+		}
+	</style>
+</h:head>
+<body>
+
+<h1 id="titulo">Iniciar Sesión</h1>
+	<div id="cuadro">
+	<h:form id="formu">
+		<p:growl id="messages"></p:growl>
+		<div id="pan" class="margin">
+		<p:panelGrid columns="2">
+
+			<p:outputLabel value="Usuario:"></p:outputLabel>
+			<p:inputText value="#{usuarioBean.usuario.nombre}"></p:inputText>
+			
+			<p:outputLabel value="Contraseña:"></p:outputLabel>
+			<p:inputText type="password" value="#{usuarioBean.usuario.password}"></p:inputText>
+			
+			
+		</p:panelGrid>
+		<br></br>
+		<div class="re">
+			<p:commandLink value="Resgistrar" action="#{usuarioBean.irRegistrar()}" ajax="false" />
+			<br/>
+			<p:commandLink value="¿Olvidaste la contraseña?" action="#{usuarioBean.irOlvidar()}" ajax="false" />
+			</div>
+		</div>
+		<p:commandButton value="Iniciar Sesión" action="#{usuarioBean.iniciarSesion}"
+			update="messages, formu"></p:commandButton>
+	</h:form>
+	</div>
+
+
+
+
+
+
+</body>
+
+</html>

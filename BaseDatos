@@ -1,0 +1,111 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 22-06-2018 a las 00:47:18
+-- Versión del servidor: 5.7.21
+-- Versión de PHP: 7.1.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `curso_sql`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `libros`
+--
+
+CREATE TABLE `libros` (
+  `codigolibro` varchar(20) NOT NULL,
+  `titulo` varchar(45) NOT NULL,
+  `autor` varchar(45) NOT NULL,
+  `anio` int(11) NOT NULL,
+  `nombreusuario` varchar(20) NOT NULL,
+  `descripcion` text,
+  `imagen` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `libros`
+--
+
+INSERT INTO `libros` (`codigolibro`, `titulo`, `autor`, `anio`, `nombreusuario`, `descripcion`, `imagen`) VALUES
+('12', 'jhsdc', 'asdas', 21, 'jesus', NULL, NULL),
+('1222', 'aaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaa', 21, 'jesus', 'Descripcionsd dsfdoignbdfoingisdnfosdinfosdfds', 'http://www.imagen.com.mx/assets/img/imagen_share.png'),
+('123', 'jhsdc', 'asdas', 21, 'pepe', NULL, NULL),
+('1251', 'Norse Mithology', 'Neil Gaiman', 2010, 'jesus', '', 'https://images-na.ssl-images-amazon.com/images/I/51C7IGsOYHL._SY264_BO1,204,203,200_QL40_.jpg'),
+('1259', 'Eragon', 'Cristopher Paolini', 2004, 'jesus', '', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Christopher_Paolini%2C_Eragon_1.jpg/265px-Christopher_Paolini%2C_Eragon_1.jpg'),
+('1261', 'The Naked Sun', 'Isaac Asiimov', 1957, 'jesus', NULL, NULL),
+('1262', 'The Caves of Steel', 'Isaac Asiimov', 1954, 'pepe', NULL, NULL),
+('1263', 'Prelude to Foundation', 'Isaac Asiimov', 1988, 'jesus', NULL, NULL),
+('1264', 'Artemis', 'Andy Weir', 2017, 'jesus', 'Descripción de Artemis de Andy Weir fsdfnosdfnosd dsogndnfgoidfg sodgndfpgidfpg dsfgmdg', 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1503524598i/36112610._UY200_.jpg'),
+('1265', 'Eldest', 'Cristopher Paolini', 2005, 'jesus', 'aefsdfdsfdsf', 'http://www.labuhardilla.com.ar/wp-content/uploads/2016/07/Eldest.png'),
+('235453', 'jhsdcdfgdfg', 'asdasgdfgfd', 21234, 'jesus', 'Descripcionsd dsfdoignbdfoingisdnfosdinfosdfds', ''),
+('241', 'The Martian ', 'Andy Weir', 2011, 'jesus', '', 'https://images.penguinrandomhouse.com/cover/9781101905005'),
+('423435345', 'sdfsdf', 'sdfdsgdfg', 234234, 'jesus', 'sdfdgdfg', ''),
+('9843-23-1231', 'Artemis', 'Andy Weir', 2017, 'pepe', 'Descripción de Artemis de Andy Weir fsdfnosdfnosd dsogndnfgoidfg sodgndfpgidfpg dsfgmdg', 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1503524598i/36112610._UY200_.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `nombre` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`nombre`, `password`, `email`) VALUES
+('jesus', 'sainz', 'jesussainz98@gmail.com'),
+('pepe', 'perez', 'sdfdgdfgfg');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `libros`
+--
+ALTER TABLE `libros`
+  ADD PRIMARY KEY (`codigolibro`),
+  ADD KEY `FK_USUARIO` (`nombreusuario`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`nombre`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `libros`
+--
+ALTER TABLE `libros`
+  ADD CONSTRAINT `FK_USUARIO` FOREIGN KEY (`nombreusuario`) REFERENCES `usuarios` (`nombre`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

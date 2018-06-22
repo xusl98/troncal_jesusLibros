@@ -1,0 +1,56 @@
+@font-face {
+    font-family: myFont;
+    src: url(font2.ttf);
+}
+
+
+body{
+	text-align: center;
+	background-image: url(https://ovacen.com/wp-content/uploads/2016/01/madera-palets.jpg);
+	/*background-repeat: no-repeat;*/
+	background-size: cover;
+}
+
+
+h1{
+	
+}
+
+#cuadro{
+	/*border: 1px solid black;*/
+	padding: 2em;
+	background-color: rgba(0,0,0,.6);
+	position: absolute;
+	left: 22vw;
+	width: 50vw;
+}
+
+#pan{
+	position: relative;
+	left: 20%;
+}
+
+.margin{
+	margin: .5em;	
+}
+
+#titulo{
+	font-size: 3em;
+	color: white;
+	font-family: myFont;
+	cursor: default;
+}
+
+.cursorDefault{
+	cursor: default;
+}
+
+.label{
+	width: 25%x;
+}
+.value{
+	width: 75%;
+}
+
+
+

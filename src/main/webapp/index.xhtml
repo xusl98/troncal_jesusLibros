@@ -1,0 +1,151 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Registrar Libros</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"></link>
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+		crossorigin="anonymous"></link>
+</h:head>
+<body>
+
+	<h1 id="titulo">Tabla de libros</h1>
+
+	<div id="profile"
+		style="text-align: right; position: fixed; top: 1em; right: 1em; color: white; font-size: 1.2em;">
+		<h:outputLabel value="#{usuarioBean.usuario.nombre}"></h:outputLabel>
+		<i class="fas fa-user-circle"></i>
+	</div>
+
+	<div id="cuadro">
+		<h:form id="formu">
+			<p:growl id="messages"></p:growl>
+			<div id="pan2" class="margin">
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Introduce el ISBN:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.codigolibro}"></p:inputText>
+
+					<p:outputLabel value="Introduce el título:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.titulo}"></p:inputText>
+
+					<p:outputLabel value="Introduce el autor:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.autor}"></p:inputText>
+
+					<p:outputLabel value="Introduce el año:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.anio}"></p:inputText>
+
+					<p:outputLabel value="Introduce una descripción(opcional):"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.descripcion}"></p:inputText>
+
+					<p:outputLabel value="Introduce una url de la carátula(opcional):"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.imagen}"></p:inputText>
+
+
+				</p:panelGrid>
+			</div>
+			<p:commandButton value="Register" action="#{libroBean.register}"
+				update="messages, formu, :formu2"></p:commandButton>
+		</h:form>
+
+
+		<!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+
+
+		<h:form id="formu2" rendered="#{libroBean.verificarSesion()}">
+
+			<p:commandButton actionListener="#{libroBean.listar()}"
+				value="Listar" ajax="false" />
+
+			<div class="margin">
+				<p:dataTable id="tbl" emptyMessage="No se han encontrado libros"
+					scrollHeight="350" scrollable="true" value="#{libroBean.lstLibros}"
+					var="emp">
+
+					<p:column style="width:16px">
+						<p:rowToggler />
+					</p:column>
+
+					<p:column filterBy="#{emp.codigolibro}" headerText="ISBN"
+						sortBy="#{emp.codigolibro}">
+						<p:outputLabel value="#{emp.codigolibro}" />
+					</p:column>
+					<p:column filterBy="#{emp.titulo}" headerText="Título"
+						sortBy="#{emp.titulo}">
+						<p:outputLabel value="#{emp.titulo}" />
+					</p:column>
+					<p:column filterBy="#{emp.autor}" headerText="Autor"
+						sortBy="#{emp.autor}">
+						<p:outputLabel value="#{emp.autor}" />
+					</p:column>
+					<p:column filterBy="#{emp.anio}" headerText="Año"
+						sortBy="#{emp.anio}">
+						<p:outputLabel value="#{emp.anio}" />
+					</p:column>
+					
+					
+					
+					<p:growl id="mensaje" showDetail="true" />
+					<p:column exportable="false" class="cursorDefault" headerText="Eliminar">
+						<p:commandLink id="el" actionListener="#{libroBean.eliminar(emp)}"
+							value="Eliminar" ajax="false" />
+							 <p:tooltip id="toolTipGrow" for="el" value="Esto borrará el libro permanentemente"
+               showEffect="clip" hideEffect="explode" position="left"/>
+					</p:column>
+					
+					
+					
+					<p:column exportable="false" class="cursorDefault" headerText="Modificar">
+						<p:commandLink id="mo" action="#{libroBean.leer(emp)}" value="Modificar"
+							ajax="false" />
+							 <p:tooltip id="toolTipGrow1" for="mo" value="Click para modificar el libro"
+               showEffect="clip" hideEffect="explode" position="left"/>
+					</p:column>
+					<p:rowExpansion>
+						<p:panelGrid columns="2" columnClasses="label,value"
+							style="width:100%">
+							<f:facet name="header">
+								<p:graphicImage width="250px" height="250px" url="#{emp.imagen}" />
+							</f:facet>
+
+							<h:outputText value="Descripción:" />
+							<h:outputText value="#{emp.descripcion}" />
+
+						</p:panelGrid>
+					</p:rowExpansion>
+
+
+				</p:dataTable>
+			</div>
+
+					
+
+
+
+		</h:form>
+
+	</div>
+
+	<h:form>
+		<p:stack
+			icon="https://www.primefaces.org/showcase/resources/demo/images/dock/stack.png"
+			expanded="true">
+			<p:menuitem action="#{libroBean.cerrarS}" value="LogOut"
+				icon="https://ugc.kn3.net/i/origin/http://fc02.deviantart.com/fs16/i/2007/211/9/9/ShutDown_Button_by_helmetk.png" />
+			<p:menuitem action="#{libroBean.home}" value="Inicio"
+				icon="https://www.primefaces.org/showcase/resources/demo/images/dock/home.png" />
+		</p:stack>
+	</h:form>
+
+
+
+
+</body>
+
+</html>
