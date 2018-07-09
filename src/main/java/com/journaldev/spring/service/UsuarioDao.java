@@ -58,7 +58,7 @@ public class UsuarioDao {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
 			return "index";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("ContraseÒa incorrecta"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Contrase√±a incorrecta"));
 			return "";
 		}
 	}
@@ -90,7 +90,7 @@ public class UsuarioDao {
 		// Nombre del host de correo, es smtp.gmail.com
 		props.setProperty("mail.smtp.host", "smtp.gmail.com");
 
-		// TLS si est· disponible
+		// TLS si est√° disponible
 		props.setProperty("mail.smtp.starttls.enable", "true");
 
 		// Puerto de gmail para envio de correos
@@ -127,12 +127,12 @@ public class UsuarioDao {
 			lstUs = em.createNativeQuery("SELECT nombre FROM Usuarios WHERE email='" + email + "'").getResultList();
 			String pass = lstPass.get(0);
 			String nombre = lstUs.get(0);
-			message.setSubject("Olvidaste tu contraseÒa");
-			message.setText("Esta es tu contraseÒa de WebDeLibros: '" + pass + "' para el usuario: '" + nombre + "'");
+			message.setSubject("Olvidaste tu contrase√±a");
+			message.setText("Esta es tu contrase√±a de WebDeLibros: '" + pass + "' para el usuario: '" + nombre + "'");
 
 			Transport t = session.getTransport("smtp");
 
-			t.connect("webdelibroscorreo@gmail.com", "polientes");
+			t.connect("webdelibroscorreo@gmail.com", "passwordHere");
 
 			t.sendMessage(message, message.getAllRecipients());
 
